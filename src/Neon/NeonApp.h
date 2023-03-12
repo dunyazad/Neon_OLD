@@ -17,6 +17,10 @@ namespace Neon {
 		void Run();
 		
 		NeonWindow* CreateNeonWindow(int width, int height, const char* title);
+
+		inline const string& GetResourceRoot() const { return resourceRoot; }
+		inline void SetResourceRoot(const string& root) { resourceRoot = root; }
+
 	protected:
 
 	private:
@@ -25,6 +29,8 @@ namespace Neon {
 		function<void()> onTerminateFunction;
 
 		list<NeonWindow*> windows;
+
+		string resourceRoot;
 	};
 
 }

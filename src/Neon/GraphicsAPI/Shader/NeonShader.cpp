@@ -4,7 +4,7 @@
 
 namespace Neon {
 
-    NeonShader::NeonShader(const char* vertexPath, const char* fragmentPath)
+    NeonShader::NeonShader(const string& vertexPath, const string& fragmentPath)
     {
         // Load the vertex shader from file
         std::ifstream vertexFile(vertexPath);
@@ -61,21 +61,21 @@ namespace Neon {
         glUseProgram(m_ID);
     }
 
-    void NeonShader::setInt(const char* name, int value)
+    void NeonShader::setInt(const string& name, int value)
     {
-        glUniform1i(glGetUniformLocation(m_ID, name), value);
+        glUniform1i(glGetUniformLocation(m_ID, name.c_str()), value);
     }
 
-    void NeonShader::setFloat(const char* name, float value)
+    void NeonShader::setFloat(const string& name, float value)
     {
-        glUniform1f(glGetUniformLocation(m_ID, name), value);
+        glUniform1f(glGetUniformLocation(m_ID, name.c_str()), value);
     }
 
-    void NeonShader::checkCompileErrors(unsigned int shader, const char* type)
+    void NeonShader::checkCompileErrors(unsigned int shader, const string& type)
     {
         int success;
         char infoLog[1024];
-        if (strcmp(type, "PROGRAM") != 0) {
+        if (type == "PROGRAM") {
             glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
             if (!success) {
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);

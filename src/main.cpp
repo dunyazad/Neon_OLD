@@ -10,6 +10,7 @@ int main() {
     Neon::NeonShader* shader = nullptr;
 
     Neon::NeonApp app;
+    app.SetResourceRoot("D:/Workspace/Neon/res");
     app.CreateNeonWindow(1024, 768, "Neon");
 
     app.OnInitialize([&]() {
@@ -37,7 +38,7 @@ int main() {
     glEnableVertexAttribArray(0);
 
     // Create the shader program
-    shader = new Neon::NeonShader("D:/Workspace/Neon/res/shader/vertexShader.glsl", "D:/Workspace/Neon/res/shader/fragmentShader.glsl");
+    shader = new Neon::NeonShader(app.GetResourceRoot() + "/shader/vertexShader.glsl", app.GetResourceRoot() + "/shader/fragmentShader.glsl");
         });
 
     app.OnUpdate([&]() {
