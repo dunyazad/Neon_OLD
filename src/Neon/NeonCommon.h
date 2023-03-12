@@ -17,4 +17,5 @@ namespace Neon {
 	class Neon;
 	class NeonApp;
 	class NeonWindow;
+	class NeonShader;
 }

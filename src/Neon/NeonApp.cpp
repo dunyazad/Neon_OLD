@@ -25,9 +25,9 @@ namespace Neon {
 		onInitializeFunction = onInitialize;
 	}
 
-	void NeonApp::OnFrame(function<void()> onFrame)
+	void NeonApp::OnUpdate(function<void()> onUpdate)
 	{
-		onFrameFunction = onFrame;
+		onUpdateFunction = onUpdate;
 	}
 
 	void NeonApp::OnTerminate(function<void()> onTerminate)
@@ -56,7 +56,7 @@ namespace Neon {
 					appFinisihed = false;
 					window->processEvents();
 
-					onFrameFunction();
+					onUpdateFunction();
 
 					window->swapBuffers();
 				}

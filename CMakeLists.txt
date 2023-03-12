@@ -50,14 +50,15 @@ endif()
 set(SOURCE_LIST
 ${CMAKE_SOURCE_DIR}/src/main.cpp
 ${CMAKE_SOURCE_DIR}/src/glad.c
-${CMAKE_SOURCE_DIR}/src/window.h
-${CMAKE_SOURCE_DIR}/src/shader.h
 ${CMAKE_SOURCE_DIR}/src/Neon/Neon.h
 ${CMAKE_SOURCE_DIR}/src/Neon/NeonCommon.h
 ${CMAKE_SOURCE_DIR}/src/Neon/NeonApp.h
 ${CMAKE_SOURCE_DIR}/src/Neon/NeonApp.cpp
 ${CMAKE_SOURCE_DIR}/src/Neon/NeonWindow.h
 ${CMAKE_SOURCE_DIR}/src/Neon/NeonWindow.cpp
+
+${CMAKE_SOURCE_DIR}/src/Neon/GraphicsAPI/Shader/NeonShader.h
+${CMAKE_SOURCE_DIR}/src/Neon/GraphicsAPI/Shader/NeonShader.cpp
 
 # ${CMAKE_SOURCE_DIR}/src/Neon/Math/SBM_Vector2.cpp
 )

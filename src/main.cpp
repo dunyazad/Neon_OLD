@@ -1,13 +1,13 @@
 #include <Neon/Neon.h>
 #include <Neon/NeonApp.h>
+#include <Neon/GraphicsAPI/Shader/NeonShader.h>
 
 #include <iostream>
-#include "window.h"
 #include "shader.h"
 
 int main() {
     unsigned int VBO, VAO;
-    Shader* shader = nullptr;
+    Neon::NeonShader* shader = nullptr;
 
     Neon::NeonApp app;
     app.CreateNeonWindow(1024, 768, "Neon");
@@ -37,10 +37,10 @@ int main() {
     glEnableVertexAttribArray(0);
 
     // Create the shader program
-    shader = new Shader("D:/Workspace/Neon/res/shader/vertexShader.glsl", "D:/Workspace/Neon/res/shader/fragmentShader.glsl");
+    shader = new Neon::NeonShader("D:/Workspace/Neon/res/shader/vertexShader.glsl", "D:/Workspace/Neon/res/shader/fragmentShader.glsl");
         });
 
-    app.OnFrame([&]() {
+    app.OnUpdate([&]() {
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT);
 
