@@ -51,14 +51,25 @@ set(SOURCE_LIST
 ${CMAKE_SOURCE_DIR}/src/main.cpp
 ${CMAKE_SOURCE_DIR}/src/glad.c
 ${CMAKE_SOURCE_DIR}/src/Neon/Neon.h
+${CMAKE_SOURCE_DIR}/src/Neon/Neon.cpp
 ${CMAKE_SOURCE_DIR}/src/Neon/NeonCommon.h
-${CMAKE_SOURCE_DIR}/src/Neon/NeonApp.h
-${CMAKE_SOURCE_DIR}/src/Neon/NeonApp.cpp
-${CMAKE_SOURCE_DIR}/src/Neon/NeonWindow.h
-${CMAKE_SOURCE_DIR}/src/Neon/NeonWindow.cpp
+
+${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonApp.h
+${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonApp.cpp
+${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonWindow.h
+${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonWindow.cpp
+${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonTime.h
+${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonTime.cpp
 
 ${CMAKE_SOURCE_DIR}/src/Neon/GraphicsAPI/Shader/NeonShader.h
 ${CMAKE_SOURCE_DIR}/src/Neon/GraphicsAPI/Shader/NeonShader.cpp
+
+${CMAKE_SOURCE_DIR}/src/Neon/ECS/NeonEntity.h
+${CMAKE_SOURCE_DIR}/src/Neon/ECS/NeonEntity.cpp
+${CMAKE_SOURCE_DIR}/src/Neon/ECS/NeonComponent.h
+${CMAKE_SOURCE_DIR}/src/Neon/ECS/NeonComponent.cpp
+${CMAKE_SOURCE_DIR}/src/Neon/ECS/NeonSystem.h
+${CMAKE_SOURCE_DIR}/src/Neon/ECS/NeonSystem.cpp
 
 # ${CMAKE_SOURCE_DIR}/src/Neon/Math/SBM_Vector2.cpp
 )

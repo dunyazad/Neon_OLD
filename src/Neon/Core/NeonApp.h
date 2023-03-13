@@ -11,7 +11,7 @@ namespace Neon {
 		~NeonApp();
 
 		void OnInitialize(function<void()> onInitialize);
-		void OnUpdate(function<void()> onUpdate);
+		void OnUpdate(function<void(NeonWindow*, float)> onUpdate);
 		void OnTerminate(function<void()> onTerminate);
 
 		void Run();
@@ -25,7 +25,7 @@ namespace Neon {
 
 	private:
 		function<void()> onInitializeFunction;
-		function<void()> onUpdateFunction;
+		function<void(NeonWindow*, float)> onUpdateFunction;
 		function<void()> onTerminateFunction;
 
 		list<NeonWindow*> windows;

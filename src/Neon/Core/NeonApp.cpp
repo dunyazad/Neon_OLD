@@ -1,7 +1,8 @@
 #pragma once
 
-#include <Neon/NeonApp.h>
-#include <Neon/NeonWindow.h>
+#include <Neon/Core/NeonApp.h>
+#include <Neon/Core/NeonWindow.h>
+#include <Neon/Core/NeonTime.h>
 
 namespace Neon {
 	NeonApp::NeonApp()
@@ -12,11 +13,7 @@ namespace Neon {
 	{
 		for (auto& window : windows)
 		{
-			if (window != nullptr)
-			{
-				delete window;
-				window = nullptr;
-			}
+			SAFE_DELETE(window)
 		}
 	}
 
@@ -25,7 +22,7 @@ namespace Neon {
 		onInitializeFunction = onInitialize;
 	}
 
-	void NeonApp::OnUpdate(function<void()> onUpdate)
+	void NeonApp::OnUpdate(function<void(NeonWindow*, float)> onUpdate)
 	{
 		onUpdateFunction = onUpdate;
 	}
@@ -37,33 +34,53 @@ namespace Neon {
 
 	void NeonApp::Run()
 	{
-		onInitializeFunction();
-
 		bool appFinisihed = false;
+
+		if (onInitializeFunction != nullptr)
+		{
+			onInitializeFunction();
+		}
 
 		if (windows.empty())
 		{
 			cout << "You should create a NeonWindow to use NeonApp" << endl;
 		}
 
+		NeonTime time("main");
+		auto now = time.Now();
+		auto lastTime = now;
+
 		while (appFinisihed == false)
 		{
+			auto now = time.Now();
+			auto timeDelta = time.DeltaMili(lastTime, now);
+
 			appFinisihed = true;
 			for (auto& window : windows)
 			{
-				if (window->shouldClose() == false)
+				if (window->ShouldClose() == false)
 				{
 					appFinisihed = false;
-					window->processEvents();
 
-					onUpdateFunction();
+					window->MakeCurrent();
+					window->ProcessEvents();
 
-					window->swapBuffers();
+					if (onUpdateFunction != nullptr)
+					{
+						onUpdateFunction(window, timeDelta);
+					}
+
+					window->SwapBuffers();
 				}
 			}
+
+			lastTime = now;
 		}
 
-		onTerminateFunction();
+		if (onTerminateFunction != nullptr)
+		{
+			onTerminateFunction();
+		}
 	}
 
 	NeonWindow* NeonApp::CreateNeonWindow(int width, int height, const char* title)

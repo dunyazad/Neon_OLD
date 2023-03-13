@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Neon/NeonWindow.h>
+#include <Neon/Core/NeonWindow.h>
 
 namespace Neon {
 
@@ -18,15 +18,15 @@ namespace Neon {
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         // Create a GLFW window
-        m_Window = glfwCreateWindow(width, height, title, NULL, NULL);
-        if (!m_Window) {
+        glfwWindow = glfwCreateWindow(width, height, title, NULL, NULL);
+        if (!glfwWindow) {
             std::cout << "Failed to create GLFW window" << std::endl;
             glfwTerminate();
             exit(EXIT_FAILURE);
         }
 
         // Make the window's context current
-        glfwMakeContextCurrent(m_Window);
+        MakeCurrent();
 
         // Load OpenGL function pointers using GLAD
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -39,31 +39,36 @@ namespace Neon {
     NeonWindow::~NeonWindow()
     {
         // Destroy the GLFW window
-        glfwDestroyWindow(m_Window);
+        glfwDestroyWindow(glfwWindow);
 
         // Terminate GLFW
         glfwTerminate();
     }
 
-    bool NeonWindow::shouldClose()
+    bool NeonWindow::ShouldClose()
     {
-        return glfwWindowShouldClose(m_Window);
+        return glfwWindowShouldClose(glfwWindow);
     }
 
-    void NeonWindow::processEvents()
+    void NeonWindow::MakeCurrent()
+    {
+        glfwMakeContextCurrent(glfwWindow);
+    }
+
+    void NeonWindow::ProcessEvents()
     {
         glfwPollEvents();
 
         // Check if the escape key was pressed
-        if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-            glfwSetWindowShouldClose(m_Window, GLFW_TRUE);
+        if (glfwGetKey(glfwWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+            glfwSetWindowShouldClose(glfwWindow, GLFW_TRUE);
         }
     }
 
-    void NeonWindow::swapBuffers()
+    void NeonWindow::SwapBuffers()
     {
         // Swap the front and back buffers
-        glfwSwapBuffers(m_Window);
+        glfwSwapBuffers(glfwWindow);
     }
 
 }
