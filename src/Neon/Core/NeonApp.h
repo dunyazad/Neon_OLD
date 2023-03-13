@@ -29,6 +29,10 @@ namespace Neon {
 		NeonWindow* window = nullptr;
 
 		string resourceRoot;
+
+		map<NeonID, NeonEntity*> entities;
+		map<NeonID, NeonComponent*> components;
+		map<NeonID, NeonSystem*> systems;
 	};
 
 }

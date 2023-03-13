@@ -32,6 +32,8 @@ namespace Neon {
 	class NeonEntity;
 	class NeonComponent;
 	class NeonSystem;
+
+	typedef long NeonID;
 }
 
 #define SAFE_DELETE(x) if(x != nullptr) { delete x; x = nullptr; }

@@ -36,7 +36,7 @@ namespace Neon {
 
 		if ((*fileStream).is_open()) {
 			(*fileStream).seekg(0, ios::end);
-			fileLength = (*fileStream).tellg();
+			fileLength = (long)(*fileStream).tellg();
 			(*fileStream).seekg(0, ios::beg);
 
 			return true;
