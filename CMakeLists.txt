@@ -60,6 +60,8 @@ ${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonWindow.h
 ${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonWindow.cpp
 ${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonTime.h
 ${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonTime.cpp
+${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonFile.h
+${CMAKE_SOURCE_DIR}/src/Neon/Core/NeonFile.cpp
 
 ${CMAKE_SOURCE_DIR}/src/Neon/GraphicsAPI/Shader/NeonShader.h
 ${CMAKE_SOURCE_DIR}/src/Neon/GraphicsAPI/Shader/NeonShader.cpp

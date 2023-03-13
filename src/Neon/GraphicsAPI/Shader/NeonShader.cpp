@@ -1,31 +1,30 @@
 #pragma once
 
 #include <Neon/GraphicsAPI/Shader/NeonShader.h>
+#include <Neon/Core/NeonFile.h>
 
 namespace Neon {
 
     NeonShader::NeonShader(const string& vertexPath, const string& fragmentPath)
     {
-        // Load the vertex shader from file
-        std::ifstream vertexFile(vertexPath);
-        if (!vertexFile) {
+        NeonFile vertexFile;
+        vertexFile.Open(vertexPath, false);
+
+        if (vertexFile.isOpen() == false) {
             std::cout << "Failed to open vertex shader file" << std::endl;
             exit(EXIT_FAILURE);
         }
-        std::stringstream vertexStream;
-        vertexStream << vertexFile.rdbuf();
-        std::string vertexSource = vertexStream.str();
+        std::string vertexSource = vertexFile.ReadAll();
         const char* vertexSourcePtr = vertexSource.c_str();
 
-        // Load the fragment shader from file
-        std::ifstream fragmentFile(fragmentPath);
-        if (!fragmentFile) {
+        NeonFile fragmentFile;
+        fragmentFile.Open(fragmentPath, false);
+
+        if (fragmentFile.isOpen() == false) {
             std::cout << "Failed to open fragment shader file" << std::endl;
             exit(EXIT_FAILURE);
         }
-        std::stringstream fragmentStream;
-        fragmentStream << fragmentFile.rdbuf();
-        std::string fragmentSource = fragmentStream.str();
+        std::string fragmentSource = fragmentFile.ReadAll();
         const char* fragmentSourcePtr = fragmentSource.c_str();
 
         // Compile the shaders
