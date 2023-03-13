@@ -4,7 +4,7 @@
 
 namespace Neon {
 
-    NeonWindow::NeonWindow(int width, int height, const char* title)
+    NeonWindow::NeonWindow(int width, int height, const string& title, NeonWindow* sharingWindow)
     {
         // Initialize GLFW
         if (!glfwInit()) {
@@ -18,21 +18,28 @@ namespace Neon {
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         // Create a GLFW window
-        glfwWindow = glfwCreateWindow(width, height, title, NULL, NULL);
-        if (!glfwWindow) {
-            std::cout << "Failed to create GLFW window" << std::endl;
-            glfwTerminate();
-            exit(EXIT_FAILURE);
+        if (sharingWindow != nullptr)
+        {
+            glfwWindow = glfwCreateWindow(width, height, title.c_str(), NULL, sharingWindow->glfwWindow);
         }
+        else
+        {
+            glfwWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 
-        // Make the window's context current
-        MakeCurrent();
+            if (!glfwWindow) {
+                std::cout << "Failed to create GLFW window" << std::endl;
+                glfwTerminate();
+                exit(EXIT_FAILURE);
+            }
 
-        // Load OpenGL function pointers using GLAD
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-            std::cout << "Failed to initialize GLAD" << std::endl;
-            glfwTerminate();
-            exit(EXIT_FAILURE);
+            MakeCurrent();
+
+            // Load OpenGL function pointers using GLAD
+            if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+                std::cout << "Failed to initialize GLAD" << std::endl;
+                glfwTerminate();
+                exit(EXIT_FAILURE);
+            }
         }
     }
 
@@ -63,6 +70,10 @@ namespace Neon {
         if (glfwGetKey(glfwWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
             glfwSetWindowShouldClose(glfwWindow, GLFW_TRUE);
         }
+    }
+
+    void NeonWindow::Update(float timeDelta)
+    {
     }
 
     void NeonWindow::SwapBuffers()
